@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@lion/ajax": "^0.11.1",
+    "@lion/button": "^0.14.1",
+    "@lion/core": "^0.18.1",
+    "@lion/form": "^0.12.2",
+    "@lion/input": "^0.15.2",
+    "@lion/input-datepicker": "^0.23.4",
+    "lit-element": "^2.5.1",
+    "lit-html": "^1.4.1",
+    "rollup": "^2.53.2",
+    "rollup-plugin-copy": "^3.4.0"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@web/dev-server": "^0.1.18"
+  },
+  "scripts": {
+    "start": "web-dev-server --app-index index.html"
+  }
+}
