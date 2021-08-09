@@ -1,7 +1,13 @@
 import { LitElement, html, css } from '@lion/core';
 
 class BetbroBanner extends LitElement {
-  static get styles() {}
+  static get styles() {
+    return css`
+      img {
+        margin-bottom: 24px;
+      }
+    `;
+  }
 
   render() {
     return html`
