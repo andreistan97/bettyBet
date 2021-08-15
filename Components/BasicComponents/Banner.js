@@ -4,14 +4,21 @@ class BetbroBanner extends LitElement {
   static get styles() {
     return css`
       img {
-        margin-bottom: 24px;
+        padding: 24px;
+      }
+      p {
+        background-color: #fff;
+        padding: 0 24px;
+        margin: 0;
       }
     `;
   }
 
   render() {
     return html`
-      <img src="../../Assets/Images/BetBro.png" alt="BetBro Banner" />
+      <p>
+        <img src="../../Assets/Images/BetBro.png" alt="BetBro Banner" />
+      </p>
     `;
   }
 }

@@ -3,10 +3,22 @@ import '../BasicComponents/FormButton.js';
 import '../BasicComponents/FormInput.js';
 import '../BasicComponents/CustomForm.js';
 import { ajax } from '@lion/ajax';
+import { setUser } from '../../redux/actions/auth.js';
+import { selectUserId, selectUserEmail } from '../../redux/selectors/auth.js';
+import '../BasicComponents/ReduxClass.js';
 
 class LoginForm extends LitElement {
   static get styles() {
     return css`
+      * {
+        background-color: #fff;
+      }
+      h3 {
+        margin: 16px 48px;
+      }
+      form-input {
+        font-size: 18px;
+      }
       button {
         padding: 0px;
         border: none;
@@ -22,11 +34,14 @@ class LoginForm extends LitElement {
   }
   static get properties() {
     return {
-      _userData: {
-        type: Object,
-      },
+      email: { type: String },
+      id: { type: String },
     };
   }
+  // constructor() {
+  //   this.email = null;
+  //   this.id = null;
+  // }
 
   connectedCallback() {
     super.connectedCallback();
@@ -37,7 +52,8 @@ class LoginForm extends LitElement {
       <custom-form>
         <h3>Enter your details</h3>
         <form @submit=${this._handleFormSubmit}>
-          <form-input name="email" label="Email" type="email"> </form-input>
+          <form-input name="email" placeholder="Email" type="email">
+          </form-input>
           <form-input
             name="password"
             label="Password"

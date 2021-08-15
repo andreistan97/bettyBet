@@ -7,16 +7,26 @@ class LoginPage extends LitElement {
     return css`
       div {
         text-align: center;
+        background-color: #fff;
+        float: right;
+        padding-right: 16px;
       }
+
       a {
         text-decoration: none;
       }
       span {
         margin: 0 auto;
-        color: #c1f35c;
-        background-color: #5a7029ab;
-        padding: 16px;
+        background-color: #fff;
+        padding: 16px 24px;
         display: inline-block;
+        color: #617140;
+
+        border: 3px solid #e5e9dc;
+      }
+      span:hover {
+        background-color: #e5e9dc;
+        border-color: grey;
       }
     `;
   }

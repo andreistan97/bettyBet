@@ -11,6 +11,7 @@ class FormInput extends LionInput {
           margin: 0 auto;
           width: 75%;
           padding: 16px 0;
+
           font-weight: bold;
         }
         :host(:focus) {
