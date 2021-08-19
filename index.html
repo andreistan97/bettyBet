@@ -14,16 +14,36 @@
         },
       };
     </script>
-    <script type="module" src="./Components/Layouts/Login.js"></script>
+    <script type="module" src="app.js"></script>
+    <script
+      type="module"
+      src="Components/BigComponents/BetbroFooter.js"
+    ></script>
+    <script type="module" src="Components/BasicComponents/Banner.js"></script>
     <style>
       html {
         background-color: #869960;
         margin: 0 240px;
       }
+      main {
+        background-color: #fff;
+      }
+      @media only screen and (max-width: 1024px) {
+        html {
+          margin: 0 120px;
+        }
+      }
+      @media only screen and (max-width: 650px) {
+        html {
+          margin: 0;
+        }
+      }
     </style>
-    <title>Log In</title>
+    <title>App</title>
   </head>
   <body>
-    <login-page></login-page>
+    <betbro-banner></betbro-banner>
+    <main></main>
+    <betbro-footer></betbro-footer>
   </body>
 </html>

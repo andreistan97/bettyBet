@@ -11,9 +11,24 @@ class LeaguesAndGames extends LitElement {
         list-style-type: none;
         padding: 0px;
       }
+      h1 {
+        font-size: 20px;
+        font-family: cursive;
+      }
+      h3 {
+        font-size: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: grey;
+        padding: 10px;
+        margin: 0;
+      }
+      .container:last-child {
+        padding-bottom: 20px;
+      }
       h3:hover {
         cursor: pointer;
-        color: grey;
+        color: black;
       }
       .select {
         display: flex;
@@ -40,8 +55,13 @@ class LeaguesAndGames extends LitElement {
         background-color: crimson;
         border: 1px solid blue;
       }
-      .more {
+      .more > p {
+        position: relative;
+        top: 20px;
+      }
+      .more > p:hover {
         cursor: pointer;
+        color: blue;
       }
     `;
   }
@@ -134,7 +154,7 @@ class LeaguesAndGames extends LitElement {
         : html`
             <h1>Most betted games</h1>
             ${Object.keys(this.top10Games).map(
-              (key, index) => html`
+              (key, index) => html` <div class="container">
                 <h3 @click=${this.showDetails}>${key}</h3>
                 <ul>
                   <li>
@@ -169,10 +189,9 @@ class LeaguesAndGames extends LitElement {
                   </li>
                   <li class="more" @click=${this.showMoreOptions}>
                     <p>More</p>
-                    <p>Options</p>
                   </li>
                 </ul>
-              `
+              </div>`
             )}
           `}
     `;

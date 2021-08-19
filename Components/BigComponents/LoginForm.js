@@ -12,17 +12,37 @@ class LoginForm extends LitElement {
     return css`
       * {
         background-color: #fff;
+        box-sizing: border-box;
       }
       h3 {
-        margin: 16px 48px;
+        padding-top: 50px;
+        text-align: center;
       }
-      form-input {
-        font-size: 18px;
+      form {
+        text-align: center;
+      }
+      input {
+        display: block;
+        margin: 16px auto;
+        padding: 16px;
+        border-radius: 12px;
+      }
+      input:focus {
+        outline: none;
+        border: 3px solid black;
       }
       button {
-        padding: 0px;
-        border: none;
-        margin-left: 12px;
+        padding: 16px;
+        margin-top: 16px;
+        border-radius: 6px;
+      }
+      button:focus {
+        outline: none;
+      }
+      button:hover {
+        cursor: pointer;
+        background-color: grey;
+        color: #fff;
       }
       .error,
       .notVerified {
@@ -52,16 +72,9 @@ class LoginForm extends LitElement {
       <custom-form>
         <h3>Enter your details</h3>
         <form @submit=${this._handleFormSubmit}>
-          <form-input name="email" placeholder="Email" type="email">
-          </form-input>
-          <form-input
-            name="password"
-            label="Password"
-            type="password"
-          ></form-input>
-          <button type="submit">
-            <form-button>da</form-button>
-          </button>
+          <input name="email" placeholder="Email" type="email" />
+          <input name="password" placeholder="password" type="password" />
+          <button type="submit">Log In</button>
         </form>
         <div class="error">
           <h4>Wrong email or password. please try again!</h4>
@@ -79,7 +92,8 @@ class LoginForm extends LitElement {
     const formData = new FormData(form);
     this._userData = Object.fromEntries(formData);
     console.log(this._userData);
-    this._callLoginApi();
+    window.location.href = '/home';
+    // this._callLoginApi();
   }
 
   async _callLoginApi() {

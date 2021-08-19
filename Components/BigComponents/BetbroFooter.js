@@ -1,6 +1,6 @@
 import { LitElement, html, css } from '@lion/core';
 
-class BetbroFooter extends LitElement {
+export class BetbroFooter extends LitElement {
   static get styles() {
     return css`
       a {
@@ -17,7 +17,6 @@ class BetbroFooter extends LitElement {
         font-size: 18px;
       }
       nav {
-        margin-top: 30px;
         text-align: center;
         border-top: 2px solid #fff;
       }

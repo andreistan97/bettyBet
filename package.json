@@ -6,6 +6,7 @@
     "@lion/form": "^0.12.2",
     "@lion/input": "^0.15.2",
     "@lion/input-datepicker": "^0.23.4",
+    "@vaadin/router": "^1.7.4",
     "lit-element": "^2.5.1",
     "lit-html": "^1.4.1",
     "pwa-helpers": "^0.9.1",

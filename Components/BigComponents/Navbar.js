@@ -8,18 +8,20 @@ class NavBar extends LitElement {
       }
       ul {
         list-style-type: none;
-        padding-right: 40px;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 24px;
+      }
+      h1 {
+        margin: 0;
+        padding: 24px;
       }
       li {
         text-decoration: none;
         padding: 12px 0;
       }
-      a {
-        text-decoration: none;
-        color: #02db26;
-      }
-      a:hover {
-        color: black;
+      li:hover {
+        background-color: grey;
       }
       h1:hover {
         color: #5c5c5c;
@@ -31,10 +33,16 @@ class NavBar extends LitElement {
       @media only screen and (min-width: 768px) {
         ul {
           display: flex;
+          background-color: #fff;
+          border: 2px solid aqua;
         }
         li {
           flex: 1;
           justify-content: space-around;
+          border-right: 2px solid black;
+        }
+        li:last-child {
+          border-right: none;
         }
         .toggle {
           display: flex;
@@ -46,6 +54,15 @@ class NavBar extends LitElement {
     `;
   }
 
+  handleRedirectHome() {
+    window.location.href = '/home';
+  }
+  handleRedirectProfile() {
+    window.location.href = '/profile';
+  }
+  handleRedirectSupport() {
+    window.location.href = '/support';
+  }
   _handleClick(event) {
     if (event.target.nextElementSibling.classList.contains('toggle')) {
       event.target.nextElementSibling.classList.remove('toggle');
@@ -58,14 +75,14 @@ class NavBar extends LitElement {
       <header>
         <h1 class="menu" @click=${this._handleClick}>Menu</h1>
         <ul class="toggle">
-          <li>
-            <a href="/home.html">Home</a>
+          <li @click=${this.handleRedirectHome}>
+            <span>Home</span>
           </li>
-          <li>
-            <a href="/profile.html">Profile</a>
+          <li @click=${this.handleRedirectProfile}>
+            <span>Profile</span>
           </li>
-          <li>
-            <a href="/contact.html">Support</a>
+          <li @click=${this.handleRedirectSupport}>
+            <span>Support</span>
           </li>
         </ul>
       </header>

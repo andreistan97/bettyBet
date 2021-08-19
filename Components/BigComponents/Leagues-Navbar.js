@@ -9,7 +9,7 @@ class LeaguesNavbar extends LitElement {
         list-style-type: none;
       }
       li {
-        display: inline;
+        /* display: inline; */
         border: 1px solid green;
         padding: 8px;
         margin: 0;
@@ -20,6 +20,15 @@ class LeaguesNavbar extends LitElement {
         cursor: pointer;
         background-color: #ecebeb;
         color: #3d4b23;
+      }
+      @media only screen and (min-width: 480px) {
+        ul {
+          display: flex;
+        }
+        li {
+          flex: 1;
+          text-align: center;
+        }
       }
     `;
   }
@@ -47,22 +56,22 @@ class LeaguesNavbar extends LitElement {
   }
 
   handleRomania() {
-    window.location.href = './romania.html';
+    window.location.href = './romania';
   }
   handleEngland() {
-    window.location.href = './england.html';
+    window.location.href = './england';
   }
   handleFrance() {
-    window.location.href = './france.html';
+    window.location.href = './france';
   }
   handleGermany() {
-    window.location.href = './germany.html';
+    window.location.href = './germany';
   }
   handleItaly() {
-    window.location.href = './italy.html';
+    window.location.href = './italy';
   }
   handleSpain() {
-    window.location.href = './spain.html';
+    window.location.href = './spain';
   }
 
   render() {
