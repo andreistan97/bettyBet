@@ -20,12 +20,15 @@ export class LoginButtons extends LitElement {
         padding: 16px 24px;
         display: inline-block;
         color: #617140;
+        border: #798a56;
 
         border: 3px solid #e5e9dc;
       }
-      span:hover {
-        background-color: #e5e9dc;
-        border-color: grey;
+      span:hover,
+      span:focus {
+        border: 2px solid #535e38;
+        background-color: #a9c278;
+        color: black;
       }
     `;
   }

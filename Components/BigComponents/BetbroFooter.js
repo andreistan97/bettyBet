@@ -11,14 +11,30 @@ export class BetbroFooter extends LitElement {
       }
       span {
         font-weight: bold;
-        color: #6d6862c0;
+        color: black;
+        font-family: system-ui;
       }
       p {
         font-size: 18px;
       }
+      .container {
+        font-family: sans-serif;
+        color: #999;
+      }
       nav {
-        text-align: center;
-        border-top: 2px solid #fff;
+        border-top: 2px solid blue;
+        padding-top: 12px;
+        text-align: left;
+        padding-bottom: 36px;
+        background-color: #fff;
+      }
+      .container {
+        padding-left: 36px;
+      }
+      @media only screen and (min-width: 600px) {
+        .container {
+          padding-left: 58px;
+        }
       }
     `;
   }
@@ -26,9 +42,11 @@ export class BetbroFooter extends LitElement {
   render() {
     return html`
       <nav>
-        <a href="/">BetBro</a>
-        <p>&copy;Copyright <span>2021</span>.</p>
-        <p>All rights reserved. Powered by <span>Andrei Stanciu</span>.</p>
+        <div class="container">
+          <a href="/">BetBro</a>
+          <p>&copy;Copyright <span>2021</span>.</p>
+          <p>All rights reserved. Powered by <span>Andrei Stanciu</span>.</p>
+        </div>
       </nav>
     `;
   }

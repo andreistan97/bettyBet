@@ -29,7 +29,8 @@ class LoginForm extends LitElement {
       }
       input:focus {
         outline: none;
-        border: 3px solid black;
+        border: 2px solid #869960;
+        box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.13);
       }
       button {
         padding: 16px;
