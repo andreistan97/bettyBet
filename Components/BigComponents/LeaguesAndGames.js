@@ -1,4 +1,5 @@
 import { LitElement, html, css } from '@lion/core';
+import './Ticket';
 
 class LeaguesAndGames extends LitElement {
   static get styles() {
@@ -128,14 +129,25 @@ class LeaguesAndGames extends LitElement {
     );
   }
   _selectOdd(event) {
+    const game =
+      event.target.parentElement.parentElement.parentElement.firstElementChild
+        .innerText;
     if (event.target.classList.contains('clicked')) {
       event.target.classList.remove('clicked');
+      window.sessionStorage.removeItem(game);
+      console.log(window.sessionStorage);
       // sterge meci din bilet
     } else {
       this.removeClicks(event.target);
-      // sterge meci din bilet
       event.target.classList.add('clicked');
       // adauga meci in bilet
+      const properties = {
+        odd: event.target.innerText,
+        selection: event.target.previousElementSibling.innerText,
+      };
+      window.sessionStorage.setItem(game, JSON.stringify(properties));
+      console.log(Object.entries(window.sessionStorage));
+      console.log(Object.keys(window.sessionStorage));
     }
   }
   showDetails(event) {
@@ -152,6 +164,7 @@ class LeaguesAndGames extends LitElement {
       ${!this.top10Games
         ? html`Content is loading`
         : html`
+            <betbro-ticket></betbro-ticket>
             <h1>Most betted games</h1>
             ${Object.keys(this.top10Games).map(
               (key, index) => html` <div class="container">
