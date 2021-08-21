@@ -1,7 +1,5 @@
-import '../Components/BigComponents/BetbroFooter';
 import '../Components/BigComponents/LoginButtons';
 import '../Components/BigComponents/LoginForm';
-import '../Components/BasicComponents/Banner';
 
 import { LitElement, html, css } from '@lion/core';
 

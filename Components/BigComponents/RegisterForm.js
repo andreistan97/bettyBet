@@ -9,10 +9,56 @@ import { ajax } from '@lion/ajax';
 class RegisterForm extends LitElement {
   static get styles() {
     return css`
+      * {
+        background-color: #fff;
+        box-sizing: border-box;
+      }
+      h3 {
+        padding-top: 50px;
+        text-align: center;
+      }
+      form {
+        text-align: center;
+      }
+      form > input {
+        width: 75%;
+      }
+      input {
+        display: block;
+        margin: 16px auto;
+        padding: 16px;
+        border-radius: 12px;
+      }
+      input:focus {
+        outline: none;
+        border: 2px solid #869960;
+        box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.13);
+      }
       button {
-        padding: 0px;
-        border: none;
-        margin-left: 12px;
+        padding: 16px;
+        margin-top: 16px;
+        border-radius: 6px;
+        display: block;
+        margin: 0 auto;
+      }
+      button:focus {
+        outline: none;
+      }
+      button:hover {
+        cursor: pointer;
+        background-color: grey;
+        color: #fff;
+      }
+      .error,
+      .notVerified {
+        color: #b31717;
+        visibility: hidden;
+        font-weight: bold;
+      }
+      @media only screen and (min-width: 600px) {
+        form > input {
+          width: 50%;
+        }
       }
     `;
   }
@@ -37,49 +83,57 @@ class RegisterForm extends LitElement {
     console.log(this._maxDate);
   }
 
-  _handleFormSubmit() {
-    console.log('da');
+  _handleRegister(event) {
+    // console.log(event.target.firstName.value);
+    // console.log(event.target.lastName.value);
+    // console.log(event.target.email.value);
+    // console.log(event.target.confirmEmail.value);
+    // console.log(event.target.date.value);
+    // console.log(event.target.terms.value);
+    const data = {
+      firstName: event.target.firstName.value,
+      lastName: event.target.lastName.value,
+      email: event.target.email.value,
+      confirmEmail: event.target.confirmEmail.value,
+      date: event.target.date.value,
+    };
+    console.log(data);
+    // trimis datele astea
   }
 
   render() {
     return html`
       <custom-form>
-        <h3>Register your account</h3>
-        <form @submit=${this._handleFormSubmit}>
-          <form-input
+        <h3>Create account</h3>
+        <form @submit=${this._handleRegister}>
+          <input
             name="firstName"
-            label="First Name"
+            placeholder="First Name"
             type="text"
-          ></form-input>
-          <form-input
-            name="lastName"
-            label="Last Name"
-            type="text"
-          ></form-input>
-          <form-input
-            name="password"
-            label="Password"
-            type="password"
-          ></form-input>
-          <form-input
-            name="confirmPassword"
-            label="Confirm Password"
-            type="password"
-          ></form-input>
-          <form-input name="email" label="Email" type="email"></form-input>
-          <date-picker
-            name="birthday"
-            label="Date of birth"
-            .validators=${[new MaxDate(this._maxDate)]}
-          ></date-picker>
-          <form-input
-            name="phone"
-            label="Phone Number"
-            type="text"
-          ></form-input>
-          <button type="submit">
-            <form-button>Register</form-button>
-          </button>
+            required
+          />
+          <input name="lastName" placeholder="Last Name" type="text" required />
+          <input name="email" placeholder="Email" type="email" required />
+          <input
+            name="confirmEmail"
+            placeholder="Confirm Email"
+            type="email"
+            required
+          />
+          <input name="date" placeholder="Date of birth" type="date" required />
+          <div class="container">
+            <input
+              name="terms"
+              type="checkbox"
+              required
+              style="display:inline"
+            />
+            <span>
+              I have read and understand the
+              <a href="/terms">terms and conditions</a>.
+            </span>
+          </div>
+          <button type="submit">Register Now</button>
         </form>
       </custom-form>
     `;

@@ -1,5 +1,6 @@
 import './views/login';
 import './views/home';
+import './views/register';
 
 import { Router } from '@vaadin/router';
 
@@ -7,6 +8,10 @@ const Routes = [
   {
     path: '/',
     component: 'login-view',
+  },
+  {
+    path: '/register',
+    component: 'register-view',
   },
   {
     path: '/home',
