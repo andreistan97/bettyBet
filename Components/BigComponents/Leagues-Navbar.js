@@ -8,6 +8,9 @@ class LeaguesNavbar extends LitElement {
         padding: 0;
         list-style-type: none;
       }
+      a[invisible] {
+        visibility: hidden;
+      }
       li {
         /* display: inline; */
         border: 1px solid green;
@@ -56,22 +59,22 @@ class LeaguesNavbar extends LitElement {
   }
 
   handleRomania() {
-    window.location.href = './romania';
+    this.shadowRoot.querySelector('.ro').click();
   }
   handleEngland() {
-    window.location.href = './england';
+    this.shadowRoot.querySelector('.en').click();
   }
   handleFrance() {
-    window.location.href = './france';
+    this.shadowRoot.querySelector('.fr').click();
   }
   handleGermany() {
-    window.location.href = './germany';
+    this.shadowRoot.querySelector('.ge').click();
   }
   handleItaly() {
-    window.location.href = './italy';
+    this.shadowRoot.querySelector('.it').click();
   }
   handleSpain() {
-    window.location.href = './spain';
+    this.shadowRoot.querySelector('.sp').click();
   }
 
   render() {
@@ -84,6 +87,12 @@ class LeaguesNavbar extends LitElement {
           <li @click=${this.handleGermany}>Germany</li>
           <li @click=${this.handleItaly}>Italy</li>
           <li @click=${this.handleSpain}>Spain</li>
+          <a href="/romania" invisible class="ro"></a>
+          <a href="/england" invisible class="en"></a>
+          <a href="/france" invisible class="fr"></a>
+          <a href="/germany" invisible class="ge"></a>
+          <a href="/italy" invisible class="it"></a>
+          <a href="/spain" invisible class="sp"></a>
         </ul>
       </nav>
     `;

@@ -1,6 +1,8 @@
 import './views/login';
 import './views/home';
 import './views/register';
+import './views/profile';
+import './views/support';
 
 import { Router } from '@vaadin/router';
 
@@ -53,5 +55,4 @@ const Routes = [
 
 const main = document.querySelector('main');
 
-const router = new Router(main);
-router.setRoutes(Routes);
+export const router = new Router(main).setRoutes(Routes);

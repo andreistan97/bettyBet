@@ -1,6 +1,8 @@
 import { LitElement, html, css } from '@lion/core';
+import { connect } from 'pwa-helpers';
+import { store } from '../../redux/store/store';
 
-class NavBar extends LitElement {
+class NavBar extends connect(store)(LitElement) {
   static get styles() {
     return css`
       * {
@@ -10,7 +12,6 @@ class NavBar extends LitElement {
         list-style-type: none;
         padding: 0;
         margin: 0;
-        margin-bottom: 24px;
       }
       h1 {
         margin: 0;
@@ -50,18 +51,25 @@ class NavBar extends LitElement {
         h1 {
           display: none;
         }
+        a[invisible] {
+          visibility: hidden;
+        }
       }
     `;
   }
 
   handleRedirectHome() {
-    window.location.href = '/home';
+    this.shadowRoot.querySelector('.home').click();
   }
   handleRedirectProfile() {
-    window.location.href = '/profile';
+    this.shadowRoot.querySelector('.profile').click();
   }
   handleRedirectSupport() {
-    window.location.href = '/support';
+    this.shadowRoot.querySelector('.support').click();
+  }
+  handleLogOut() {
+    // dispatch logout UNSET AUTH
+    this.shadowRoot.querySelector('.logout').click();
   }
   _handleClick(event) {
     if (event.target.nextElementSibling.classList.contains('toggle')) {
@@ -84,7 +92,14 @@ class NavBar extends LitElement {
           <li @click=${this.handleRedirectSupport}>
             <span>Support</span>
           </li>
+          <li @click=${this.handleLogOut}>
+            <span>Log Out</span>
+          </li>
         </ul>
+        <a href="/home" class="home" invisible></a>
+        <a href="/support" class="support" invisible></a>
+        <a href="/profile" class="profile" invisible></a>
+        <a href="/" class="logout" invisible></a>
       </header>
     `;
   }

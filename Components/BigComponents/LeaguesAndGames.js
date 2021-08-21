@@ -1,7 +1,9 @@
 import { LitElement, html, css } from '@lion/core';
 import './Ticket';
+import { connect } from 'pwa-helpers';
+import { store } from '../../redux/store/store';
 
-class LeaguesAndGames extends LitElement {
+class LeaguesAndGames extends connect(store)(LitElement) {
   static get styles() {
     return css`
       html {
@@ -107,10 +109,15 @@ class LeaguesAndGames extends LitElement {
     };
     console.log(Object.keys(this.top10Games));
     console.log(Object.values(this.top10Games));
-
+    console.log(store.getState());
     // campionate, meciuri si cote: un array care contine obiecte cu numele campionatelor (ex liga1), la proprietati meciurile, iar la fiecare
     // meci, numele optiunilor si cotele
   }
+
+  stateChanged(state) {
+    this.ticket = state.ticket;
+  }
+
   getSiblings(parent) {
     const siblingsArr = [];
     let sibling = parent.firstChild;

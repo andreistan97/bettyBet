@@ -1,11 +1,31 @@
-import { defaultReducer } from './defaultReducer.js';
-import { SET_AUTH } from '../actions/auth.js';
+import {
+  ADD_BET,
+  ADD_TICKET,
+  REMOVE_BET,
+  SET_AUTH,
+  UNSET_AUTH,
+} from '../actions/auth.js';
 
-const actionTypes = [SET_AUTH];
-
-const initialState = {
+const INITIAL_STATE = {
   email: null,
   id: null,
+  ticket: [],
 };
 
-export const authReducer = defaultReducer(initialState, actionTypes);
+export const reducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case SET_AUTH:
+      return {
+        ...state,
+        email: action.email,
+        id: action.id,
+      };
+    case UNSET_AUTH:
+      return {
+        ...state,
+        user: null,
+      };
+    default:
+      return state;
+  }
+};

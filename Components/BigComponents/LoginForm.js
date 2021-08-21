@@ -2,12 +2,12 @@ import { LitElement, html, css } from '@lion/core';
 import '../BasicComponents/FormButton.js';
 import '../BasicComponents/FormInput.js';
 import '../BasicComponents/CustomForm.js';
-import { ajax } from '@lion/ajax';
-import { setUser } from '../../redux/actions/auth.js';
-import { selectUserId, selectUserEmail } from '../../redux/selectors/auth.js';
 import '../BasicComponents/ReduxClass.js';
+import { connect } from 'pwa-helpers';
+import { store } from '../../redux/store/store';
+import { setAuth } from '../../redux/actions/auth';
 
-class LoginForm extends LitElement {
+class LoginForm extends connect(store)(LitElement) {
   static get styles() {
     return css`
       * {
@@ -27,6 +27,10 @@ class LoginForm extends LitElement {
         padding: 16px;
         border-radius: 12px;
       }
+      a[invisible] {
+        visibility: hidden;
+      }
+
       input:focus {
         outline: none;
         border: 2px solid #869960;
@@ -59,13 +63,14 @@ class LoginForm extends LitElement {
       id: { type: String },
     };
   }
-  // constructor() {
-  //   this.email = null;
-  //   this.id = null;
-  // }
+  stateChanged(state) {
+    this.email = state.email;
+    this.id = state.id;
+  }
 
   connectedCallback() {
     super.connectedCallback();
+    console.log(store.getState());
   }
 
   render() {
@@ -77,6 +82,7 @@ class LoginForm extends LitElement {
           <input name="password" placeholder="password" type="password" />
           <button type="submit">Log In</button>
         </form>
+        <a invisible class="redirect" href="/home">invisible</a>
         <div class="error">
           <h4>Wrong email or password. please try again!</h4>
         </div>
@@ -92,9 +98,13 @@ class LoginForm extends LitElement {
     const form = event.target;
     const formData = new FormData(form);
     this._userData = Object.fromEntries(formData);
-    console.log(this._userData);
-    window.location.href = '/home';
+    console.log(event.target.email.value);
     // this._callLoginApi();
+    store.dispatch(setAuth(event.target.email.value, 1));
+    console.log(store.getState());
+    // window.location.href = '/home';
+    const aTag = this.shadowRoot.querySelector('.redirect');
+    aTag.click();
   }
 
   async _callLoginApi() {
@@ -103,7 +113,6 @@ class LoginForm extends LitElement {
 
     if (response === true) {
       window.sessionStorage.setItem('email', `${this._userData.email}`);
-      window.location.href = 'register.html';
     }
     // daca contul nu exista
     else {

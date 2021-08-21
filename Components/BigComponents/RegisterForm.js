@@ -84,12 +84,6 @@ class RegisterForm extends LitElement {
   }
 
   _handleRegister(event) {
-    // console.log(event.target.firstName.value);
-    // console.log(event.target.lastName.value);
-    // console.log(event.target.email.value);
-    // console.log(event.target.confirmEmail.value);
-    // console.log(event.target.date.value);
-    // console.log(event.target.terms.value);
     const data = {
       firstName: event.target.firstName.value,
       lastName: event.target.lastName.value,
@@ -98,7 +92,9 @@ class RegisterForm extends LitElement {
       date: event.target.date.value,
     };
     console.log(data);
-    // trimis datele astea
+    // trimis datele astea in spate
+
+    // schimbat pagina
   }
 
   render() {
