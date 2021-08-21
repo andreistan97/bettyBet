@@ -5,7 +5,7 @@ class LeaguesNavbar extends LitElement {
     return css`
       ul {
         margin: 0;
-        padding: 0;
+        padding: 24px 0;
         list-style-type: none;
       }
       a[invisible] {

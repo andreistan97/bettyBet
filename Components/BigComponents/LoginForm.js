@@ -70,6 +70,7 @@ class LoginForm extends connect(store)(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
+    console.log('login');
     console.log(store.getState());
   }
 
@@ -94,15 +95,12 @@ class LoginForm extends connect(store)(LitElement) {
   }
   _handleFormSubmit(event) {
     event.preventDefault();
-    console.log(event.target);
     const form = event.target;
     const formData = new FormData(form);
     this._userData = Object.fromEntries(formData);
     console.log(event.target.email.value);
     // this._callLoginApi();
     store.dispatch(setAuth(event.target.email.value, 1));
-    console.log(store.getState());
-    // window.location.href = '/home';
     const aTag = this.shadowRoot.querySelector('.redirect');
     aTag.click();
   }

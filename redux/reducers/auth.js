@@ -23,7 +23,30 @@ export const reducer = (state = INITIAL_STATE, action) => {
     case UNSET_AUTH:
       return {
         ...state,
-        user: null,
+        email: null,
+        id: null,
+      };
+    case ADD_BET:
+      return {
+        ...state,
+        ticket: [...state.ticket, action.ticket],
+      };
+    case REMOVE_BET:
+      return {
+        ...state,
+        ticket: [
+          ...state.ticket.filter(game => game.game !== action.ticket.game),
+        ],
+        // ticket: [
+        //   ...state.ticket.slice(0, action.ticket[index]),
+        //   ...state.ticket.slice(action.ticket[index] + 1),
+        // ],
+        // [state.ticket.filter(ticket => ticket !== action.ticket)]
+      };
+    case ADD_TICKET:
+      return {
+        ...state,
+        ticket: state.ticket.filter(game => game),
       };
     default:
       return state;

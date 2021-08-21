@@ -2,6 +2,7 @@ import { LitElement, html, css } from '@lion/core';
 import './Ticket';
 import { connect } from 'pwa-helpers';
 import { store } from '../../redux/store/store';
+import { addBet, removeBet, addTicket } from '../../redux/actions/auth';
 
 class LeaguesAndGames extends connect(store)(LitElement) {
   static get styles() {
@@ -139,22 +140,25 @@ class LeaguesAndGames extends connect(store)(LitElement) {
     const game =
       event.target.parentElement.parentElement.parentElement.firstElementChild
         .innerText;
+    const odd = event.target.innerText;
+    const option = event.target.previousElementSibling.innerText;
     if (event.target.classList.contains('clicked')) {
-      event.target.classList.remove('clicked');
-      window.sessionStorage.removeItem(game);
-      console.log(window.sessionStorage);
       // sterge meci din bilet
+      event.target.classList.remove('clicked');
+      store.dispatch(removeBet(game, option, odd));
     } else {
+      // adauga meci in bilet
+      store
+        .getState()
+        .ticket.forEach(match =>
+          match.game === game
+            ? store.dispatch(removeBet(match.game, match.option, match.odd))
+            : null
+        );
       this.removeClicks(event.target);
       event.target.classList.add('clicked');
-      // adauga meci in bilet
-      const properties = {
-        odd: event.target.innerText,
-        selection: event.target.previousElementSibling.innerText,
-      };
-      window.sessionStorage.setItem(game, JSON.stringify(properties));
-      console.log(Object.entries(window.sessionStorage));
-      console.log(Object.keys(window.sessionStorage));
+      store.dispatch(addBet(game, option, odd));
+      console.log(store.getState());
     }
   }
   showDetails(event) {

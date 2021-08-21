@@ -1,6 +1,7 @@
 import { LitElement, html, css } from '@lion/core';
 import { connect } from 'pwa-helpers';
 import { store } from '../../redux/store/store';
+import { unsetAuth } from '../../redux/actions/auth';
 
 class NavBar extends connect(store)(LitElement) {
   static get styles() {
@@ -68,7 +69,7 @@ class NavBar extends connect(store)(LitElement) {
     this.shadowRoot.querySelector('.support').click();
   }
   handleLogOut() {
-    // dispatch logout UNSET AUTH
+    store.dispatch(unsetAuth(store.getState().email, store.getState().id));
     this.shadowRoot.querySelector('.logout').click();
   }
   _handleClick(event) {

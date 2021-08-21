@@ -12,10 +12,11 @@ export const setAuth = (email, id) => {
   };
 };
 
-export const unsetAuth = (id, email) => {
+export const unsetAuth = (email, id) => {
   return {
     type: UNSET_AUTH,
     email,
+    id,
   };
 };
 
