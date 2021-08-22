@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   email: null,
   id: null,
   ticket: [],
+  funds: null,
 };
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -19,6 +20,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         email: action.email,
         id: action.id,
+        funds: action.funds,
       };
     case UNSET_AUTH:
       return {
@@ -46,7 +48,9 @@ export const reducer = (state = INITIAL_STATE, action) => {
     case ADD_TICKET:
       return {
         ...state,
-        ticket: state.ticket.filter(game => game),
+        ticket: [],
+        funds: action.funds,
+        // sterge funds cand pui bilet
       };
     default:
       return state;

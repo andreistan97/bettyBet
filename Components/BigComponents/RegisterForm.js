@@ -174,6 +174,16 @@ class RegisterForm extends LitElement {
       return false;
     }
   }
+  isPassValid(pass) {
+    const passReg = new RegExp(
+      '^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$'
+    );
+    if (passReg.test(pass)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   async createAccount(data) {
     const formattedData = {
@@ -216,6 +226,7 @@ class RegisterForm extends LitElement {
     const isCNP = this.isCNPValid(data.cnp);
     const isPhone = this.isPhoneValid(data.phone);
     const isPass = this.isPassConfirmed(data.password, data.confirmPass);
+    const isPassValid = this.isPassValid(data.password);
     const isDate = this.isDate18orMoreYearsOld(
       data.date.getDate(),
       data.date.getMonth(),
@@ -224,6 +235,9 @@ class RegisterForm extends LitElement {
     isMail
       ? true
       : (this.shadowRoot.querySelector('.mail').style.display = 'block');
+    isPassValid
+      ? true
+      : (this.shadowRoot.querySelector('.password').style.display = 'block');
     isCNP
       ? true
       : (this.shadowRoot.querySelector('.cnp').style.display = 'block');
@@ -237,11 +251,11 @@ class RegisterForm extends LitElement {
       ? true
       : (this.shadowRoot.querySelector('.confirmPass').style.display = 'block');
 
-    isMail && isCNP && isPhone && isDate
+    isMail && isCNP && isPhone && isDate && isPassValid
       ? console.log('request acum')
       : console.log('nu chiar acum');
 
-    if (isMail && isCNP && isPhone && isDate) {
+    if (isMail && isCNP && isPhone && isDate && isPassValid) {
       const response = await this.createAccount(data);
       if (response.message === 'User is existing') {
         this.shadowRoot.querySelector('.existing').style.display = 'block';
@@ -250,7 +264,6 @@ class RegisterForm extends LitElement {
         // this.shadowRoot.querySelector('.redirect').click();
         const popup = this.shadowRoot.querySelector('.popup');
         popup.classList.remove('invisible');
-        setTimeout({});
         popup.classList.remove('hidden');
         popup.classList.add('abs');
         popup.classList.add('show');

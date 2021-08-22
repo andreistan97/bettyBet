@@ -49,11 +49,13 @@ class LoginForm extends connect(store)(LitElement) {
         background-color: grey;
         color: #fff;
       }
-      .error,
-      .notVerified {
+      .error {
         color: #b31717;
         visibility: hidden;
         font-weight: bold;
+        text-align: center;
+        font-size: 18px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
     `;
   }
@@ -87,36 +89,41 @@ class LoginForm extends connect(store)(LitElement) {
         <div class="error">
           <h4>Wrong email or password. please try again!</h4>
         </div>
-        <div class="notVerified">
-          <h4>You need to verify your account first!</h4>
-        </div>
       </custom-form>
     `;
   }
-  _handleFormSubmit(event) {
+  async _handleFormSubmit(event) {
     event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
-    this._userData = Object.fromEntries(formData);
-    console.log(event.target.email.value);
-    // this._callLoginApi();
-    store.dispatch(setAuth(event.target.email.value, 1));
-    const aTag = this.shadowRoot.querySelector('.redirect');
-    aTag.click();
+    const data = {
+      username: event.target.email.value,
+      password: event.target.password.value,
+    };
+    const promise = await this._callLoginApi(data);
+    console.log(promise);
+    if (promise.message === 'Logged in.') {
+      // dispatch funds and id
+      store.dispatch(setAuth(data.username, promise.id, promise.funds));
+      const aTag = this.shadowRoot.querySelector('.redirect');
+      aTag.click();
+    } else {
+      this.shadowRoot.querySelector('.error').style.visibility = 'visible';
+    }
   }
 
-  async _callLoginApi() {
+  async _callLoginApi(data) {
     // fake an api call
-    const response = true;
-
-    if (response === true) {
-      window.sessionStorage.setItem('email', `${this._userData.email}`);
-    }
+    const response = await fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const final = await response.json();
+    return final;
     // daca contul nu exista
-    else {
-      const errorDiv = this.shadowRoot.querySelector('.error');
-      errorDiv.style.visibility = 'visible';
-    }
+    const errorDiv = this.shadowRoot.querySelector('.error');
+    errorDiv.style.visibility = 'visible';
     // daca contul nu e verificat
     // const notVerifiedDiv = this.shadowRoot.querySelector('.notVerified');
     //notVerifiedDiv.style.visibility = 'visible';

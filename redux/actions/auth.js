@@ -4,11 +4,12 @@ export const ADD_BET = 'ADD_BET';
 export const REMOVE_BET = 'REMOVE_BET';
 export const ADD_TICKET = 'ADD_TICKET';
 
-export const setAuth = (email, id) => {
+export const setAuth = (email, id, funds) => {
   return {
     type: SET_AUTH,
     email,
     id,
+    funds,
   };
 };
 
@@ -42,9 +43,10 @@ export const removeBet = (game, option, odd) => {
   };
 };
 
-export const addTicket = ticket => {
+export const addTicket = (ticket, funds) => {
   return {
     type: ADD_TICKET,
     ticket,
+    funds,
   };
 };

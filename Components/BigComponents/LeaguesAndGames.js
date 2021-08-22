@@ -170,12 +170,22 @@ class LeaguesAndGames extends connect(store)(LitElement) {
   showMoreOptions() {
     console.log('more options');
   }
+
+  handleBet() {
+    const sum = this.shadowRoot.querySelector('.much').value;
+    store.dispatch(
+      addTicket(store.getState().ticket, store.getState().funds - sum)
+    );
+    console.log(store.getState());
+    const elements = this.shadowRoot.querySelectorAll('.clicked');
+    elements.forEach(elem => elem.classList.remove('clicked'));
+  }
+
   render() {
     return html`
       ${!this.top10Games
         ? html`Content is loading`
         : html`
-            <betbro-ticket></betbro-ticket>
             <h1>Most betted games</h1>
             ${Object.keys(this.top10Games).map(
               (key, index) => html` <div class="container">
@@ -218,6 +228,10 @@ class LeaguesAndGames extends connect(store)(LitElement) {
               </div>`
             )}
           `}
+      <input type="text" class="much" />
+      <button type="button" class="bet" @click=${this.handleBet}>
+        Place bets
+      </button>
     `;
   }
 }

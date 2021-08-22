@@ -1,61 +1,101 @@
-// import { LitElement, html, css } from '@lion/core';
+import { LitElement, html, css } from '@lion/core';
+import { connect } from 'pwa-helpers';
+import { store } from '../../redux/store/store';
 
-// class BetbroTicket extends LitElement {
-//   static get styles() {}
+class BetbroTicket extends connect(store)(LitElement) {
+  static get styles() {
+    return css`
+      .container {
+        background-color: #3b3939;
+        color: #fff;
+      }
+      .game-card {
+        overflow: hidden;
+        padding: 30px;
+        margin: 30px;
+        background-color: grey;
+      }
+      .content {
+        overflow: auto;
+        width: 100%;
+        display: inline-block;
+      }
+      .content:first-child {
+        display: block;
+        float: left;
+        width: 250px;
+      }
+      .content:last-child {
+        display: block;
+        float: right;
+        width: 250px;
+      }
+      .final {
+        display: block;
+      }
+      p {
+        visibility: hidden;
+        margin: 0;
+      }
+    `;
+  }
 
-//   static get properties() {
-//     return {
-//       games: { type: Array },
-//       odds: { type: Array },
-//       options: { type: Array },
-//       totalOdd: { type: Number },
-//       data: { type: Array },
-//     };
-//   }
+  static get properties() {
+    return {
+      games: { type: Array },
+      odds: { type: Array },
+      options: { type: Array },
+      totalOdd: { type: Number },
+      data: { type: Array },
+    };
+  }
 
-//   constructor() {
-//     super();
-//     this.games = [];
-//     this.odds = [];
-//     this.data = [];
-//     this.totalOdd = null;
-//   }
+  constructor() {
+    super();
+    this.games = [];
+    this.odds = [];
+    this.data = [];
+    this.totalOdd = null;
+  }
+  stateChanged(state) {
+    this.games = store.getState();
+  }
+  render() {
+    return html` <div class="container">
+      <div class="topBar">Your Ticket</div>
+      <div class="game-card">
+        <div class="content">
+          <span game>Meciul aici</span>
+          <br />
+          <p>test</p>
+          <span time>Data si ora</span>
+        </div>
+        <span odd>Cota meciului</span>
+      </div>
+      <div class="game-card">
+        <div class="content">
+          <span game>Meciul aici</span>
+          <br />
+          <p>test</p>
+          <span time>Data si ora</span>
+        </div>
+        <span odd>Cota meciului</span>
+      </div>
+      <div class="game-card">
+        <div class="content">
+          <span game>Meciul aici</span>
+          <br />
+          <p>test</p>
+          <span time>Data si ora</span>
+        </div>
+        <span odd>Cota meciului</span>
+      </div>
+      <div class="final">
+        <input type="number" placeholder="0.00 RON" required />
+        <span totalOdd>Cota totala</span>
+      </div>
+    </div>`;
+  }
+}
 
-//   connectedCallback() {
-//     super.connectedCallback();
-//     this.games = [...this.games, [...Object.keys(window.sessionStorage)]];
-//     this.odds = Object.values(window.sessionStorage);
-//     Object.entries(window.sessionStorage)
-//       .map(elem => elem[1])
-//       .forEach(elem => this.data.push(JSON.parse(elem)));
-//     // console.log(this.data[0].odd);
-//     // console.log(this.data[0].selection);
-//     // console.log(this.games[0]);
-//     let sum = 1;
-//     this.data.forEach(odds => (sum *= odds.odd));
-//     this.totalOdd = sum;
-//     console.log(this.totalOdd);
-//   }
-
-//   render() {
-//     return html`
-//       ${typeof this.data
-//         ? html` <div class="container">
-//             <span>${this.totalOdd}</span>
-
-//             <div class="game-card">
-//               ${this.games.map(
-//                 (game, index) => html`
-//                   <span>${game}</span>
-//                   <span>${this.data[index].odd}</span>
-//                   <span>${this.data[index].selection}</span>
-//                 `
-//               )}
-//             </div>
-//           </div>`
-//         : html`Content is loading`}
-//     `;
-//   }
-// }
-
-// window.customElements.define('betbro-ticket', BetbroTicket);
+window.customElements.define('betbro-ticket', BetbroTicket);
