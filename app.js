@@ -3,10 +3,11 @@ import './views/home';
 import './views/register';
 import './views/profile';
 import './views/support';
+import './views/league';
 
 import { Router } from '@vaadin/router';
 
-const Routes = [
+const basicRoutes = [
   {
     path: '/',
     component: 'login-view',
@@ -53,6 +54,32 @@ const Routes = [
   },
 ];
 
+const createRoutes = async () => {
+  const myUrl = 'http://localhost:3000/showLeagues';
+  const response = await fetch(myUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const jsonData = await response.json();
+  console.log(jsonData);
+  console.log(jsonData.forEach(obj => console.log(obj.id)));
+  const leagueIds = [];
+  jsonData.forEach(obj => leagueIds.push(obj.id));
+  const locationsPaths = [];
+  leagueIds.forEach(id => {
+    locationsPaths.push({
+      path: `/league/${id}`,
+      component: 'click-league',
+    });
+  });
+  return locationsPaths;
+};
+const dynamicPaths = await createRoutes();
+const routes = basicRoutes.concat(dynamicPaths);
+
 const main = document.querySelector('main');
 
-export const router = new Router(main).setRoutes(Routes);
+export const router = new Router(main).setRoutes(routes);
+console.log(routes);

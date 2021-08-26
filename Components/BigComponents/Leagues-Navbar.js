@@ -87,12 +87,12 @@ class LeaguesNavbar extends LitElement {
           <li @click=${this.handleGermany}>Germany</li>
           <li @click=${this.handleItaly}>Italy</li>
           <li @click=${this.handleSpain}>Spain</li>
-          <a href="/romania" invisible class="ro"></a>
-          <a href="/england" invisible class="en"></a>
-          <a href="/france" invisible class="fr"></a>
-          <a href="/germany" invisible class="ge"></a>
-          <a href="/italy" invisible class="it"></a>
-          <a href="/spain" invisible class="sp"></a>
+          <a href="/league/1" invisible class="ro"></a>
+          <a href="/league/2" invisible class="ge"></a>
+          <a href="/league/3" invisible class="en"></a>
+          <a href="/league/4" invisible class="sp"></a>
+          <a href="/league/5" invisible class="fr"></a>
+          <a href="/league/6" invisible class="it"></a>
         </ul>
       </nav>
     `;
