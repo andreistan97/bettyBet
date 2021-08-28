@@ -21,24 +21,24 @@ export const unsetAuth = (email, id) => {
   };
 };
 
-export const addBet = (game, option, odd) => {
+export const addBet = (game, option, odd, selection_status, id) => {
   return {
     type: ADD_BET,
     ticket: {
       game,
       option,
       odd,
+      selection_status,
+      id,
     },
   };
 };
 
-export const removeBet = (game, option, odd) => {
+export const removeBet = game => {
   return {
     type: REMOVE_BET,
     ticket: {
       game,
-      option,
-      odd,
     },
   };
 };
